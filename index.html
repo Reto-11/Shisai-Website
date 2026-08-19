@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shisai — verification for AI-drafted claims</title>
+<meta name="description" content="Shisai checks whether AI-drafted text is backed by the records it cites, and produces evidence a compliance officer can file. Deterministic. No model in the judgement.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F3F5F7;      /* cool off-white, not cream */
+    --ink:#0F1B2D;        /* deep navy ink */
+    --slate:#5A6B7B;      /* secondary text */
+    --rule:#D5DBE1;       /* hairlines */
+    --mark:#F2E26B;       /* highlighter: the cited passage */
+    --verdict:#1F6F5F;    /* one verdict colour, used once */
+    --adverse:#8A3B2E;    /* one adverse colour, used once */
+    --mono:'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans:'IBM Plex Sans', system-ui, -apple-system, Segoe UI, sans-serif;
+    --serif:'Instrument Serif', Georgia, serif;
+  }
+  *{box-sizing:border-box}
+  html{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-text-size-adjust:100%}
+  body{margin:0}
+  a{color:inherit;text-decoration-thickness:1px;text-underline-offset:3px}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px}
+  header{padding:40px 0 0}
+  .brand{font-family:var(--serif);font-size:28px;letter-spacing:.01em}
+  .brand small{font-family:var(--sans);font-size:13px;color:var(--slate);margin-left:10px;letter-spacing:.02em}
+  .hero{padding:56px 0 40px}
+  h1{font-family:var(--serif);font-weight:400;font-size:clamp(40px,7vw,64px);line-height:1.02;letter-spacing:-.01em;margin:0 0 24px}
+  h1 em{font-style:italic}
+  .lede{font-size:20px;color:var(--ink);max-width:600px;margin:0 0 14px}
+  .sub{color:var(--slate);max-width:600px;margin:0}
+  /* the specimen — a real verdict record */
+  .spec{margin:44px 0 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:22px 0;font-family:var(--mono);font-size:14.5px;line-height:1.6}
+  .spec .row{display:grid;grid-template-columns:92px 1fr;gap:14px;padding:6px 0}
+  .spec .k{color:var(--slate)}
+  .spec mark{background:var(--mark);color:var(--ink);padding:0 2px;border-radius:2px}
+  .spec .v{font-weight:500}
+  .spec .v.ok{color:var(--verdict)}
+  .spec .v.no{color:var(--adverse)}
+  .spec .ev{color:var(--slate);font-size:13px}
+  .spec .scope{margin-top:12px;padding-top:12px;border-top:1px dashed var(--rule);color:var(--slate);font-size:13px}
+  section{padding:40px 0 0}
+  h2{font-family:var(--serif);font-weight:400;font-size:30px;line-height:1.1;margin:0 0 14px}
+  p{margin:0 0 14px;max-width:620px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+  @media (max-width:640px){.two{grid-template-columns:1fr}.spec .row{grid-template-columns:1fr;gap:2px}}
+  .quiet{color:var(--slate)}
+  .line{font-family:var(--serif);font-size:26px;line-height:1.25;margin:8px 0 0}
+  .cta{margin-top:48px;padding:28px 0 0;border-top:1px solid var(--rule)}
+  .cta a.mail{display:inline-block;font-family:var(--mono);font-size:15px;padding:12px 16px;border:1px solid var(--ink);border-radius:4px;text-decoration:none}
+  .cta a.mail:hover{background:var(--ink);color:var(--paper)}
+  footer{padding:56px 0 64px;color:var(--slate);font-size:14px}
+  footer .name{font-family:var(--serif);color:var(--ink);font-size:18px}
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{animation:up .6s ease-out both}
+    .reveal.d1{animation-delay:.08s}.reveal.d2{animation-delay:.16s}
+    @keyframes up{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">Shisai <small>shisai.ai</small></div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <h1 class="reveal">AI writes with confidence.<br>Shisai checks it against <em>the record.</em></h1>
+      <p class="lede reveal d1">A verification layer for AI-drafted claims. It checks whether what the AI wrote is backed by the document it cites, shows you the exact passage, and produces a record a compliance officer can file.</p>
+      <p class="sub reveal d1">No model makes the judgement. The same claim against the same record gives the same answer every time — and the answer comes with its evidence.</p>
+
+      <div class="spec reveal d2" aria-label="Example verification record">
+        <div class="row"><span class="k">claim</span><span>"Acme's revenue fell 20% in Q3."</span></div>
+        <div class="row"><span class="k">record</span><span>… Q3 revenue <mark>declined 20% year on year</mark> to £4.1m, reflecting …</span></div>
+        <div class="row"><span class="k">verdict</span><span class="v ok">faithful_to_supplied_text</span></div>
+        <div class="row"><span class="k">evidence</span><span class="ev">passage chars 1,204–1,236 · record sha256 9f3a…c1 · checker v1.7.2</span></div>
+        <div class="row"><span class="k">claim</span><span>"Acme is the market leader in Europe."</span></div>
+        <div class="row"><span class="k">verdict</span><span class="v no">supplied_text_does_not_say</span></div>
+        <div class="row"><span class="k">evidence</span><span class="ev">no passage in record supports this · flagged, not called false</span></div>
+        <div class="scope">Shisai checks drift from the supplied record. It does not judge whether the record itself is true.</div>
+      </div>
+    </div>
+
+    <section class="two">
+      <div>
+        <h2>On your side</h2>
+        <p>Most AI-governance tools record what the AI said so the firm can hold someone accountable later. Shisai checks the claim before it matters — for the person who can still fix it. The compliance file still exists; it's the only version where you saw it first.</p>
+        <p class="line">They watch you. We check the work.</p>
+      </div>
+      <div>
+        <h2>Honest by construction</h2>
+        <p>Every verdict names what was found: faithful, not supported, contradicted, source nonexistent, unreadable, calculation wrong. A claim it couldn't check is reported as unchecked — never padded over, never guessed.</p>
+        <p class="quiet">It never tells you something is fine when the record doesn't say so. That rule halts everything else when it's broken.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Who it's for</h2>
+      <p>Firms professionally punished for being wrong. First: compliance-led investment firms that must show a regulator the substantiation behind AI-drafted material. Second: products that draft from documents and need "traceable" to be literally true.</p>
+      <p class="quiet">Works inside the AI tools people already use (a connector for Claude Desktop and Claude Code today), as a sweep across an organisation's AI output, or as an API.</p>
+    </section>
+
+    <section class="cta">
+      <h2>Early, and looking for the first firms</h2>
+      <p>Shisai is in testing — AI agents use it unprompted, and one has already withdrawn a claim when shown the evidence. We're opening a small number of design-partner pilots with regulated firms and document-drafting products.</p>
+      <p><a class="mail" href="mailto:hello@shisai.ai">hello@shisai.ai</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="name">Shisai</div>
+    <p>子細 <em>shisai</em> — Japanese: the particulars of a matter, looked at closely. London.</p>
+  </footer>
+</div>
+</body>
+</html>
